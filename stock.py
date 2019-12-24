@@ -9,11 +9,14 @@ def accuracy_score(observed,true):
         diff += abs((float(a) - b)/b)
     return 1.0 - diff
 
-dataset = read_csv("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=AAPL&interval=5min&apikey=F4J8FATPAPG9HGF3&datatype=csv")
+#dataset = read_csv("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=AAPL&interval=5min&apikey=F4J8FATPAPG9HGF3&datatype=csv")
 symbols = read_csv("constituents.csv")
 
-print np.array(symbols['Symbol'])
-forcast_weight = 100
+
+for sym in np.array(symbols['Symbol']):
+    data = read_csv("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=%s&interval=5min&apikey=F4J8FATPAPG9HGF3&datatype=csv" % (sym))
+    print np.array(data['close'])
+"""forcast_weight = 100
 
 array = dataset.values
 Y = array[:,4]
@@ -37,3 +40,4 @@ ax.plot(range(len(Y) - len(predictions),len(Y)),predictions,color='blue')
 #pyplot.plot(Y, color='red')
 #pyplot.plot(predictions, color='blue')
 pyplot.show()
+"""
